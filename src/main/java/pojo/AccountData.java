@@ -1,6 +1,7 @@
 package pojo;
 
 public class AccountData {
+    private String caseName;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,34 +14,82 @@ public class AccountData {
     private String joinDate;       // join date
 
     // Getters & setters
+    public String getCaseName() {
+        return caseName;
+    }
+    public void setCaseName(String caseName) {
+        this.caseName = caseName;
+    }
 
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-    public String getState() { return state; }
-    public void setState(String state) { this.state = state; }
+    public String getState() {
+        return state;
+    }
+    public void setState(String state) {
+        this.state = state;
+    }
 
-    public String getDob() { return dob; }
-    public void setDob(String dob) { this.dob = dob; }
+    public String getDob() {
+        return dob;
+    }
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
 
-    public String getLicenseNumber() { return licenseNumber; }
-    public void setLicenseNumber(String licenseNumber) { this.licenseNumber = licenseNumber; }
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
 
-    public String getLicenseExp() { return licenseExp; }
-    public void setLicenseExp(String licenseExp) { this.licenseExp = licenseExp; }
+    public String getLicenseExp() {
+        return licenseExp;
+    }
+    public void setLicenseExp(String licenseExp) {
+        this.licenseExp = licenseExp;
+    }
 
-    public String getParticipantId() { return participantId; }
-    public void setParticipantId(String participantId) { this.participantId = participantId; }
+    public String getParticipantId() {
+        return participantId;
+    }
+    public void setParticipantId(String participantId) {
+        this.participantId = participantId;
+    }
 
-    public String getJoinDate() { return joinDate; }
-    public void setJoinDate(String joinDate) { this.joinDate = joinDate; }
+    public String getJoinDate() {
+        return joinDate;
+    }
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
+
+
 }

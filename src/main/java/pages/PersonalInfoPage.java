@@ -4,6 +4,7 @@ package pages;
 
 
 
+import reports.ExtentLogger;
 import utils.generic.GenericMethods;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -55,51 +56,50 @@ public class PersonalInfoPage extends BasePage {
     private WebElement selector_YearList;
 
 
-
-
-
     public PersonalInfoPage() {
         PageFactory.initElements(new AppiumFieldDecorator(DriverManager.getDriver()), this);
     }
 
-    public void isPersonalInfoHeaderVisible() throws InterruptedException {
+    public PersonalInfoPage isPersonalInfoHeaderVisible() throws InterruptedException {
         isElementVisible(header_CreateAccountPage,"PersonalInfo header");
+        return this;
     }
 
 
-    public void fillFirstName(String firstName) throws InterruptedException {
+    public PersonalInfoPage fillFirstName(String firstName) throws InterruptedException {
         setText(txtBox_Firstname,firstName,"First Name");
+        return this;
     }
 
-    public void fillLastName(String lastName) throws InterruptedException {
+    public PersonalInfoPage fillLastName(String lastName) throws InterruptedException {
         setText(txtBox_Lastname,lastName,"Last Name");
+        return this;
     }
 
-    public void fillEmail(String email) throws InterruptedException {
+    public PersonalInfoPage fillEmail(String email) throws InterruptedException {
         setText(txtBox_Email,email,"Email");
+        return this;
     }
 
-    public void fillPhone(String phone) throws InterruptedException {
+    public PersonalInfoPage fillPhone(String phone) throws InterruptedException {
         String formattedPhoneno = GenericMethods.formatPhoneNumber(phone);
         setText(txtBox_Phone,formattedPhoneno,"Phone");
+        return this;
     }
 
-    public void selectState(String state) throws InterruptedException {
+    public PersonalInfoPage selectState(String state) throws InterruptedException {
         click(selector_State,"State");
         isElementVisible(header_StateList,"State header");
         chooseItemAndclick(stateName,state);
+        return this;
     }
 
-    public void selectDOB(String dob) {
+    public PersonalInfoPage selectDOB(String dob) {
         click(selector_DOB,"dob");
         String[] parts = dob.split("-");
-        if (parts.length != 3) {
-            throw new IllegalArgumentException("DOB format must be dd-MMMM-yyyy, e.g. 04-July-2017");
-        }
-        String day = parts[0];
-        String month = parts[1];
-        String year = parts[2];
-        selectDate(day,month,year,selector_YearHeader,selector_YearList);
+        selectDate(dob,selector_YearHeader,selector_YearList);
+        ExtentLogger.info("Date of birth is set to"+dob);
+        return this;
        }
 
     public AddLicensesPage clickContinue() throws InterruptedException {

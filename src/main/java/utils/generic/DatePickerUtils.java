@@ -22,7 +22,17 @@ public class DatePickerUtils extends BasePage {
     /**
      * Select a date in a calendar-style Android DatePicker.
      */
-    public static void selectDate(String day, String month, String year,WebElement yearHeader,WebElement yearList) {
+    public static void selectDate(String date,WebElement yearHeader,WebElement yearList) {
+        String[] parts = date.split("-");
+        if (parts.length != 3) {
+            throw new IllegalArgumentException("DOJ format must be dd-MMMM-yyyy, e.g. 04-July-2017");
+        }
+        String day = parts[0];
+        String month = parts[1];
+        String year = parts[2];
+
+
+
         WebDriverWait wait = new WebDriverWait(((AppiumDriver) DriverManager.getDriver()), Duration.ofSeconds(10));
         // Tap the year header
         wait.until(ExpectedConditions.elementToBeClickable(yearHeader)).click();
@@ -47,8 +57,6 @@ public class DatePickerUtils extends BasePage {
 
         WebElement setButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("android:id/button1")));
         setButton.click();
-
-        ExtentLogger.pass("DOB is set successfully");
     }
 
     /**

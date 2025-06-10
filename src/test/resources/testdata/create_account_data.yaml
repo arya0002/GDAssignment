@@ -1,5 +1,6 @@
 testData:
-  - firstName: "Amit"
+  - caseName: "1st case"
+    firstName: "Amit"
     lastName: "Kumar"
     email: "__RANDOM_EMAIL__"
     phone: "__RANDOM_PHONE__"
@@ -9,4 +10,16 @@ testData:
     licenseExp: "__TODAY_PLUS_YEARS_10__"
     participantId: "__RANDOM_PARTICIPANT_ID__"
     joinDate: "__TODAY_PLUS_DAYS_10__"
+
+#  - caseName: "2nd case"
+#    firstName: "Neha"
+#    lastName: "Sharma"
+#    email: "__RANDOM_EMAIL__"
+#    phone: "__RANDOM_PHONE__"
+#    state: "Karnataka"
+#    dob: "__TODAY_MINUS_YEARS_25__"
+#    licenseNumber: "__RANDOM_LICENSE__"
+#    licenseExp: "__TODAY_PLUS_YEARS_5__"
+#    participantId: "__RANDOM_PARTICIPANT_ID__"
+#    joinDate: "__TODAY_PLUS_DAYS_20__"
 

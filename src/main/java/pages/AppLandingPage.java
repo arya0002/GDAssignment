@@ -15,6 +15,9 @@ public class AppLandingPage extends BasePage{
     @AndroidFindBy(xpath="//android.widget.Button[@resource-id='android:id/button1']")
     private WebElement okButton_LeaforgPopup;
 
+    @AndroidFindBy(xpath="//android.widget.TextView[@text='LeafOrg']")
+    private WebElement header_LeaforgLoginPage;
+
     @AndroidFindBy(xpath="//android.webkit.WebView[@text=\"TESTLEAF\"]/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[1]/android.widget.EditText")
     private WebElement txtfield_Username;
 
@@ -31,8 +34,14 @@ public class AppLandingPage extends BasePage{
         PageFactory.initElements(new AppiumFieldDecorator(DriverManager.getDriver()), this);
     }
 
-    public void clickPopupOkButton() throws InterruptedException {
+    public AppLandingPage clickPopupOkButton() throws InterruptedException {
         click(okButton_LeaforgPopup,"okButton_LeaforgPopup button");
+        return this;
+    }
+
+    public AppLandingPage isLandingPageHeaderVisible() throws InterruptedException {
+        isElementVisible(header_LeaforgLoginPage,"LeafOrg header");
+        return this;
     }
 
     public PersonalInfoPage clickCreateAcountLink() throws InterruptedException {

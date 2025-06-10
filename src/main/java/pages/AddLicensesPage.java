@@ -5,6 +5,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import reports.ExtentLogger;
 import utils.driver.DriverManager;
 import utils.generic.DatePickerUtils;
 import utils.generic.GenericMethods;
@@ -35,32 +36,28 @@ public class AddLicensesPage extends BasePage {
     private WebElement selector_YearList;
 
 
-
-
-
     public AddLicensesPage() {
         PageFactory.initElements(new AppiumFieldDecorator(DriverManager.getDriver()), this);
     }
 
-    public void isAddLicensesHeaderVisible() throws InterruptedException {
+
+
+    public AddLicensesPage isAddLicensesHeaderVisible() throws InterruptedException {
         isElementVisible(header_AddLicensesPage,"Add Licenses header");
+        return this;
     }
 
-    public void fillLicenseNo(String licenseNo){
+    public AddLicensesPage fillLicenseNo(String licenseNo){
         setText(txtBox_LicenseNo,licenseNo,"License No");
+        return this;
     }
 
 
-    public void selectLicenseExpDate(String doe) {
+    public AddLicensesPage selectLicenseExpDate(String doe) {
         click(selector_LicenseExpDate,"License Expiration Date");
-        String[] parts = doe.split("-");
-        if (parts.length != 3) {
-            throw new IllegalArgumentException("DOB format must be dd-MMMM-yyyy, e.g. 04-July-2017");
-        }
-        String day = parts[0];
-        String month = parts[1];
-        String year = parts[2];
-        DatePickerUtils.selectDate(day,month,year,selector_YearHeader,selector_YearList);
+        DatePickerUtils.selectDate(doe,selector_YearHeader,selector_YearList);
+        ExtentLogger.info("License Expiration Date is set to"+doe);
+        return this;
        }
 
     public AddParticipantIDPage clickContinue() throws InterruptedException {

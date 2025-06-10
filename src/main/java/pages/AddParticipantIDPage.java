@@ -52,33 +52,32 @@ public class AddParticipantIDPage extends BasePage {
         PageFactory.initElements(new AppiumFieldDecorator(DriverManager.getDriver()), this);
     }
 
-    public void isAddLicensesHeaderVisible() throws InterruptedException {
+    public AddParticipantIDPage isAddLicensesHeaderVisible() throws InterruptedException {
         isElementVisible(header_AddParticipantIDPage,"Add Paricipant ID header");
+        return this;
     }
 
-    public void fillParticipantIDNo(String licenseNo){
+    public AddParticipantIDPage fillParticipantIDNo(String licenseNo){
         setText(txtBox_ParticipantIDNo,licenseNo,"Paricipant ID No");
+        return this;
     }
 
 
-    public void selectJoinDate(String doj) {
+    public AddParticipantIDPage selectJoinDate(String doj) {
         click(selector_JoinDate,"Join Date");
-        String[] parts = doj.split("-");
-        if (parts.length != 3) {
-            throw new IllegalArgumentException("DOB format must be dd-MMMM-yyyy, e.g. 04-July-2017");
-        }
-        String day = parts[0];
-        String month = parts[1];
-        String year = parts[2];
-        DatePickerUtils.selectDate(day,month,year,selector_YearHeader,selector_YearList);
+        DatePickerUtils.selectDate(doj,selector_YearHeader,selector_YearList);
+        ExtentLogger.info("Date of joining is set to"+doj);
+        return this;
        }
 
-    public void clickSubmitRegistrationButton() throws InterruptedException {
+    public AddParticipantIDPage clickSubmitRegistrationButton() throws InterruptedException {
         click(button_SubmitRegistration,"Submit Registration button");
+        return this;
     }
 
-    public void validateSuccessPopUp(){
+    public AddParticipantIDPage validateSuccessPopUp(){
         GenericMethods.validateSuccessPopup("Info","High Five! Your account is being reviewed and we will contact you as soon as you are verified.",popup_header,popup_message,popup_OKButton);
+    return this;
     }
 
 

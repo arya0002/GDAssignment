@@ -1,3 +1,4 @@
+// utils/generic/YamlDataProvider.java
 package utils.generic;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,8 +7,9 @@ import org.testng.annotations.DataProvider;
 import pojo.AccountData;
 import pojo.AccountDataWrapper;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -16,56 +18,49 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class YamlDataProvider {
 
-    private static String yamlFileName = "src/test/resources/testdata/create_account_data.yaml";
-
-    public static void setYamlFileName(String fileName) {
-        yamlFileName = fileName;
-    }
-
     @DataProvider(name = "yamlDataProvider")
-    public static Object[][] yamlDataProvider() throws IOException {
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+    public static Object[][] yamlDataProvider(Method testMethod) throws Exception {
+        YamlDataSource source = testMethod.getAnnotation(YamlDataSource.class);
+        if (source == null) {
+            throw new RuntimeException("Missing @YamlDataSource annotation.");
+        }
 
-        // Read and map YAML file to POJO
-        AccountDataWrapper wrapper = mapper.readValue(new File(yamlFileName), AccountDataWrapper.class);
+        String yamlPath = source.value();
+        InputStream inputStream = new FileInputStream(yamlPath);
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        AccountDataWrapper wrapper = mapper.readValue(inputStream, AccountDataWrapper.class);
 
         List<AccountData> accountList = wrapper.getTestData();
 
-        // Replace placeholders with actual values
         for (AccountData acc : accountList) {
-            replacePlaceholders(acc);
+            if (acc.getEmail() != null && acc.getEmail().contains("__RANDOM_EMAIL__")) {
+                acc.setEmail(generateRandomEmail());
+            }
+            if (acc.getPhone() != null && acc.getPhone().contains("__RANDOM_PHONE__")) {
+                acc.setPhone(generateRandomPhone());
+            }
+            if (acc.getLicenseNumber() != null && acc.getLicenseNumber().contains("__RANDOM_LICENSE__")) {
+                acc.setLicenseNumber(generateRandomLicenseNumber());
+            }
+            if (acc.getParticipantId() != null && acc.getParticipantId().contains("__RANDOM_PARTICIPANT_ID__")) {
+                acc.setParticipantId(generateRandomParticipantId());
+            }
+            if (acc.getDob() != null && acc.getDob().contains("__TODAY_MINUS_YEARS_")) {
+                acc.setDob(generateDateRelativeToToday(acc.getDob()));
+            }
+            if (acc.getLicenseExp() != null && acc.getLicenseExp().contains("__TODAY_PLUS_YEARS_")) {
+                acc.setLicenseExp(generateDateRelativeToToday(acc.getLicenseExp()));
+            }
+            if (acc.getJoinDate() != null && acc.getJoinDate().contains("__TODAY_PLUS_DAYS_")) {
+                acc.setJoinDate(generateDateRelativeToToday(acc.getJoinDate()));
+            }
         }
 
-        // Prepare data for TestNG DataProvider
         Object[][] result = new Object[accountList.size()][1];
         for (int i = 0; i < accountList.size(); i++) {
             result[i][0] = accountList.get(i);
         }
         return result;
-    }
-
-    private static void replacePlaceholders(AccountData acc) {
-        if (acc.getEmail() != null && acc.getEmail().contains("__RANDOM_EMAIL__")) {
-            acc.setEmail(generateRandomEmail());
-        }
-        if (acc.getPhone() != null && acc.getPhone().contains("__RANDOM_PHONE__")) {
-            acc.setPhone(generateRandomPhone());
-        }
-        if (acc.getLicenseNumber() != null && acc.getLicenseNumber().contains("__RANDOM_LICENSE__")) {
-            acc.setLicenseNumber(generateRandomLicenseNumber());
-        }
-        if (acc.getParticipantId() != null && acc.getParticipantId().contains("__RANDOM_PARTICIPANT_ID__")) {
-            acc.setParticipantId(generateRandomParticipantId());
-        }
-        if (acc.getDob() != null && acc.getDob().contains("__TODAY_MINUS_YEARS_")) {
-            acc.setDob(generateDateRelativeToToday(acc.getDob()));
-        }
-        if (acc.getLicenseExp() != null && acc.getLicenseExp().contains("__TODAY_PLUS_YEARS_")) {
-            acc.setLicenseExp(generateDateRelativeToToday(acc.getLicenseExp()));
-        }
-        if (acc.getJoinDate() != null && acc.getJoinDate().contains("__TODAY_PLUS_DAYS_")) {
-            acc.setJoinDate(generateDateRelativeToToday(acc.getJoinDate()));
-        }
     }
 
     private static String generateRandomEmail() {
@@ -82,9 +77,7 @@ public class YamlDataProvider {
     }
 
     private static String generateRandomParticipantId() {
-        int num = ThreadLocalRandom.current().nextInt(100_000_000, 1_000_000_000);
-        return String.valueOf(num);
-        //return  UUID.randomUUID().toString().substring(0, 9).toUpperCase();
+        return String.format("%09d", ThreadLocalRandom.current().nextInt(100000000, 1000000000));
     }
 
     private static String generateDateRelativeToToday(String placeholder) {
@@ -92,16 +85,18 @@ public class YamlDataProvider {
         LocalDate date = LocalDate.now();
 
         if (placeholder.matches("__TODAY_MINUS_YEARS_\\d+__")) {
-            int years = Integer.parseInt(placeholder.replaceAll("\\D", ""));
+            int years = Integer.parseInt(placeholder.replaceAll("\\D+", ""));
             date = date.minusYears(years);
         } else if (placeholder.matches("__TODAY_PLUS_YEARS_\\d+__")) {
-            int years = Integer.parseInt(placeholder.replaceAll("\\D", ""));
+            int years = Integer.parseInt(placeholder.replaceAll("\\D+", ""));
             date = date.plusYears(years);
         } else if (placeholder.matches("__TODAY_PLUS_DAYS_\\d+__")) {
-            int days = Integer.parseInt(placeholder.replaceAll("\\D", ""));
+            int days = Integer.parseInt(placeholder.replaceAll("\\D+", ""));
             date = date.plusDays(days);
+        } else {
+            throw new IllegalArgumentException("Unsupported date placeholder: " + placeholder);
         }
 
-        return date.format(formatter);
+        return date.format(formatter); // 👈 Ensures format like 10-June-2006
     }
 }
