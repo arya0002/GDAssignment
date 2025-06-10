@@ -33,6 +33,17 @@ public class BasePage {
        Assert.assertTrue(element.isDisplayed(),elementname+" is not displayed");
        ExtentLogger.pass(elementname+" is displayed");
     }
+
+    protected boolean isElementPresent(WebElement element, String elementname){
+        explicitWait(element);
+        if(element.isDisplayed())
+            return true;
+        else {
+            return false;
+        }
+
+    }
+
     protected String getText(WebElement element){
         explicitWait(element);
         String textValue = element.getText();
