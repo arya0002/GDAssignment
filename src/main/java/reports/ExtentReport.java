@@ -16,7 +16,7 @@ public class ExtentReport {
     public static void initReport(){
         if(isNull(extent)) {
             extent = new ExtentReports();
-            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/index.html");
+            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/report.html");
 
             sparkReporter.config().setTheme(Theme.DARK);
             sparkReporter.config().setReportName("GD Automation Report");

@@ -12,8 +12,7 @@ public class ExtentLogger {
     }
 
     public static void fail(String message){
-//        ExtentManager.getExtentTest().fail(message,
-//                MediaEntityBuilder.createScreenCaptureFromBase64String(ScreenshotUtils.getBase64Image()).build());
+
         String base64Image = null;
         try {
             base64Image = ScreenshotUtils.getBase64Image();
