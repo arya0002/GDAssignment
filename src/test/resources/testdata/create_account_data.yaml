@@ -1,5 +1,5 @@
 testData:
-  - caseName: "1st case"
+  - caseName: "Create Account"
     firstName: "Amit"
     lastName: "Kumar"
     email: "__RANDOM_EMAIL__"

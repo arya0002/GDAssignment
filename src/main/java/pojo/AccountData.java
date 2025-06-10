@@ -1,95 +1,66 @@
 package pojo;
 
 public class AccountData {
+    // For both tests
     private String caseName;
+    private String userName;
+    private String password;
     private String firstName;
     private String lastName;
+
+    // For account creation only
     private String email;
     private String phone;
     private String state;
-    private String dob;            // date of birth, format: dd-MMMM-yyyy or placeholder
+    private String dob;
     private String licenseNumber;
-    private String licenseExp;     // license expiry date
+    private String licenseExp;
     private String participantId;
-    private String joinDate;       // join date
+    private String joinDate;
 
-    // Getters & setters
-    public String getCaseName() {
-        return caseName;
-    }
-    public void setCaseName(String caseName) {
-        this.caseName = caseName;
-    }
+    // Getters & Setters for all fields
 
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public String getCaseName() { return caseName; }
+    public void setCaseName(String caseName) { this.caseName = caseName; }
 
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public String getUserName() { return userName; }
+    public void setUserName(String userName) { this.userName = userName; }
 
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public String getPhone() {
-        return phone;
-    }
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public String getState() {
-        return state;
-    }
-    public void setState(String state) {
-        this.state = state;
-    }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getDob() {
-        return dob;
-    }
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
 
-    public String getLicenseExp() {
-        return licenseExp;
-    }
-    public void setLicenseExp(String licenseExp) {
-        this.licenseExp = licenseExp;
-    }
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
 
-    public String getParticipantId() {
-        return participantId;
-    }
-    public void setParticipantId(String participantId) {
-        this.participantId = participantId;
-    }
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
 
-    public String getJoinDate() {
-        return joinDate;
-    }
-    public void setJoinDate(String joinDate) {
-        this.joinDate = joinDate;
-    }
+    public String getLicenseNumber() { return licenseNumber; }
+    public void setLicenseNumber(String licenseNumber) { this.licenseNumber = licenseNumber; }
 
+    public String getLicenseExp() { return licenseExp; }
+    public void setLicenseExp(String licenseExp) { this.licenseExp = licenseExp; }
 
+    public String getParticipantId() { return participantId; }
+    public void setParticipantId(String participantId) { this.participantId = participantId; }
+
+    public String getJoinDate() { return joinDate; }
+    public void setJoinDate(String joinDate) { this.joinDate = joinDate; }
+
+    @Override
+    public String toString() {
+        return caseName != null ? caseName : (firstName + " " + lastName);
+    }
 }

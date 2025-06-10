@@ -6,7 +6,8 @@
     <test parallel="methods" thread-count="1" name="Test">
         <parameter name="platformName" value="Android"/>
         <classes>
-            <class name="tests.SampleTest"/>
+            <class name="tests.CreateUserAccount"/>
+            <class name="tests.UpdateUserAccount"/>
         </classes>
     </test>
 </suite>

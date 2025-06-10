@@ -1,0 +1,6 @@
+testData:
+  - caseName: "Update User name"
+    userName: "rajkumar@testleaf.com"
+    password: "Leaf@123"
+    firstName: "Argamn"
+    lastName: "Singh"

@@ -19,7 +19,7 @@ public class ExtentReport {
             ExtentSparkReporter sparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/index.html");
 
             sparkReporter.config().setTheme(Theme.DARK);
-            sparkReporter.config().setReportName("TrustWallet Automation Report");
+            sparkReporter.config().setReportName("GD Automation Report");
             sparkReporter.config().setDocumentTitle("checking");
             extent.attachReporter(sparkReporter);
         }

@@ -44,6 +44,21 @@ public class AppLandingPage extends BasePage{
         return this;
     }
 
+    public AppLandingPage fillUserName(String userName) throws InterruptedException {
+        setText(txtfield_Username,userName,"Username");
+        return this;
+    }
+
+    public AppLandingPage fillPassword(String password) throws InterruptedException {
+        setText(txtfield_Password,password,"Password");
+        return this;
+    }
+
+    public UserHomePage clickLogin() throws InterruptedException {
+        click(button_Login,"Login button");
+        return new UserHomePage();
+    }
+
     public PersonalInfoPage clickCreateAcountLink() throws InterruptedException {
         click(link_CreateAccount,"link_CreateAccount link");
         //Thread.sleep(5000);
