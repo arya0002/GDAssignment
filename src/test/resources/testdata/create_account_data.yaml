@@ -1,0 +1,12 @@
+testData:
+  - firstName: "Amit"
+    lastName: "Kumar"
+    email: "__RANDOM_EMAIL__"
+    phone: "__RANDOM_PHONE__"
+    state: "Karnataka"
+    dob: "__TODAY_MINUS_YEARS_18__"
+    licenseNumber: "__RANDOM_LICENSE__"
+    licenseExp: "__TODAY_PLUS_YEARS_10__"
+    participantId: "__RANDOM_PARTICIPANT_ID__"
+    joinDate: "__TODAY_PLUS_DAYS_10__"
+
