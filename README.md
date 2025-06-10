@@ -9,6 +9,19 @@ How to Run
 1.use src/testng.xml to execute the test cases
 2.Check report.html, its a extent report and all the logging are getting done there
 
+Although i have automated just 2 positive test cases due to time constraint. Automation can be extend for scenarios like 1. Login Scenarios
+Valid login with correct credentials
+Invalid login with wrong username/password
+Forgot Password
+Lockout after N failed attempts(if applicable)
+Upload/update profile picture
+Edit personal information (name, DOB, licence detail, etc)
+View driver license details
+Verify mandatory fields validation when updating details
+and many more...
+
+
+
 
 
 
